@@ -1,1 +1,1 @@
-# jd2_project
+# Веб приложение Monitor Sensors
