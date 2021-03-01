@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <title>Add sensor</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Add sensor</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="form-inline my-2 my-lg-0">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/}">Cancel</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<p></p>
+
+<form th:action="@{/add-sensor}" method="post" th:object="${sensor}">
+    <div class="container">
+        <div class="mb-3 row">
+            <label for="name" class="col-sm-2 col-form-label">Name *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" th:field="*{sensorName}" placeholder="Name"
+                       autofocus required>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('sensorName')}" th:errors="*{sensorName}">Validation
+                    error</small>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="model" class="col-sm-2 col-form-label">Model *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="model" th:field="*{sensorModel}" placeholder="Model"
+                       autofocus required>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('sensorModel')}" th:errors="*{sensorModel}">Validation
+                    error</small>
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2 col-form-label">Range</label>
+            <div class="col">
+                    <input type="number" class="form-control" th:field="*{sensorRangeFrom}" placeholder="From"
+                           autofocus required>
+                <small class="form-text text-danger" th:text="${error}">Validation error</small>
+
+            </div>
+            <div class="col">
+                <input type="number" class="form-control" th:field="*{sensorRangeTo}" placeholder="To"
+                       autofocus required>
+                <small class="form-text text-danger" th:text="${error}">Validation error</small>
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Type *</label>
+            <div class="col">
+                <!--            <div class="col-lg-4 col-md-9 col-sm-12">-->
+                <select class="form-select" aria-label="Default select example" th:field="*{idFromIndicator}"
+                        autofocus required>
+                    <option value="" hidden>Select</option>
+                    <option th:each="indicator : ${indicators}"
+                            th:value="${indicator.indicatorId}"
+                            th:text="${indicator.indicatorType}">Indicator</option>
+                </select>
+            </div>
+        </div>
+
+<!--        <p></p>-->
+
+<!--        <div class="form-group row">-->
+<!--            <label class="col-sm-2 col-form-label">Unit *</label>-->
+<!--            <div class="col">-->
+<!--                &lt;!&ndash;            <div class="col-lg-4 col-md-9 col-sm-12">&ndash;&gt;-->
+<!--                <select class="form-select" aria-label="Default select example" required>-->
+<!--                    <option selected disabled hidden>Select</option>-->
+<!--                    <option th:each="indicator : ${indicators}"-->
+<!--                            th:value="${indicator.indicatorId}"-->
+<!--                            th:text="${indicator.indicatorUnit}">Temperature</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <p></p>
+
+        <div class="mb-3 row">
+            <label for="location" class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="location" placeholder="Location" th:field="*{sensorLocation}">
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('sensorLocation')}"
+                       th:errors="*{sensorLocation}">Validation error</small>
+            </div>
+        </div>
+
+        <p></p>
+
+        <div class="mb-3 row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="description" style="height: 100px"
+                          placeholder="Maximum text length 200 characters" th:field="*{sensorDescription}"></textarea>
+                <small class="form-text text-danger" th:if="${#fields.hasErrors('sensorDescription')}"
+                       th:errors="*{sensorDescription}">Validation error</small>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

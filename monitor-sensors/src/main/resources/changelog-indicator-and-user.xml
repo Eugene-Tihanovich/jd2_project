@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="tihanovich">
+        <sql>
+            create database if not exists monitor_sensors;
+        </sql>
+    </changeSet>
+
+    <changeSet id="2" author="tihanovich">
+        <sql>
+            create table if not exists indicator (
+            indicator_id int not null primary key auto_increment,
+            indicator_type varchar(35) not null,
+            indicator_unit varchar(25) not null
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="3" author="tihanovich">
+        <sql>
+            insert into indicator(indicator_type, indicator_unit) values('Pressure', 'bar');
+            insert into indicator(indicator_type, indicator_unit) values('Voltage', 'voltage');
+            insert into indicator(indicator_type, indicator_unit) values('Temperature', '°C');
+            insert into indicator(indicator_type, indicator_unit) values('Humidity', '%');
+        </sql>
+    </changeSet>
+
+    <changeSet id="4" author="tihanovich">
+        <sql>
+            create table if not exists user (
+            user_id int not null primary key auto_increment,
+            user_login varchar(30) not null,
+            user_password varchar(40) not null
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="5" author="tihanovich">
+        <sql>
+            insert into user(user_login, user_password) values('admin', 'admin');
+            insert into user(user_login, user_password) values('viewer', 'viewer');
+
+        </sql>
+    </changeSet>
+</databaseChangeLog>
