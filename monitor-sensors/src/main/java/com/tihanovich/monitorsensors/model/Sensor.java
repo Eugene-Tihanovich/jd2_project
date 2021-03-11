@@ -44,4 +44,5 @@ public class Sensor {
     @Size(max = 200)
     @Column(length = 200)
     private String sensorDescription;
+
 }
